@@ -25,10 +25,19 @@ class AOCDay01 {
             .sum()
         return differenceSum
     }
+
+    fun getSimilarityScore(lists: List<List<Long>>): Long {
+        var score = 0L
+        for (num in lists[0]) {
+            score += num * (lists[1].size - (lists[1] - listOf(num)).size)
+        }
+        return score
+    }
 }
 
 fun main() {
     val fileInput = Path("src/main/resources/inputDay01a.txt").readLines()
     val input = AOCDay01().getInputAsLongs(fileInput)
     println(AOCDay01().getDifferenceSumOfOrderedLists(input))
+    println(AOCDay01().getSimilarityScore(input))
 }
