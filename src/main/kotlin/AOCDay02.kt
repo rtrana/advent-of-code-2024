@@ -1,6 +1,5 @@
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
-import kotlin.math.abs
 
 class AOCDay02() {
 
