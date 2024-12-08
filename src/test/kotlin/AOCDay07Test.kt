@@ -29,7 +29,7 @@ class AOCDay07Test {
 
     @Test
     fun `should count total possible calibrations`() {
-        assertEquals(3749, aoc.totalBinaryCalibrationResults())
+        assertEquals(3749, aoc.totalCalibrationResults())
     }
 
 }
