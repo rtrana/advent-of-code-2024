@@ -7,8 +7,7 @@ class AOCDay07() {
     private var calibrationsMap: MutableMap<Long, List<Long>> = mutableMapOf()
 
     class TreeNode(var value: Long, var loc: Int) {
-        var left: TreeNode? = null
-        var right: TreeNode? = null
+        var children: MutableList<TreeNode> = mutableListOf()
     }
 
     fun parseInputToMap(input: List<String>) {
@@ -18,12 +17,17 @@ class AOCDay07() {
                 it[1].split(" ").map { it.toLong() } }
     }
 
-    fun totalCalibrationResults(): Long {
+    fun totalBinaryCalibrationResults(): Long {
         return this.calibrationsMap.filter { traverseOperations(it.value, it.key) }
             .keys.toMutableList().sumOf { it}
     }
 
-    fun traverseOperations(calibrations: List<Long>, targetValue: Long): Boolean {
+    fun totalCalibrationResults(): Long {
+        return this.calibrationsMap.filter { traverseOperations(it.value, it.key, false) }
+            .keys.toMutableList().sumOf { it}
+    }
+
+    fun traverseOperations(calibrations: List<Long>, targetValue: Long, hasBinaryChildren: Boolean = true): Boolean {
         val stack = Stack<TreeNode>()
         var i = 0
         var current = TreeNode(calibrations[i], i)
@@ -32,10 +36,10 @@ class AOCDay07() {
         while ((current.value != -1L || stack.isNotEmpty()) && !targetMet) {
             if (i != calibrations.size - 1 && current.value <= targetValue) {
                 i++
-                current.left = TreeNode(current.value * calibrations[i], i)
-                current.right = TreeNode(current.value + calibrations[i], i)
-                stack.push(current.right)
-                stack.push(current.left)
+                if (hasBinaryChildren)
+                    addBinaryChildrenOperations(current, calibrations, i, stack)
+                else
+                    addMultipleChildrenOperations(current, calibrations, i, stack)
             } else {
                 if (current.value == targetValue) {
                     targetMet = true
@@ -50,11 +54,33 @@ class AOCDay07() {
 
         return targetMet
     }
+
+    private fun addBinaryChildrenOperations(current: TreeNode, calibrations: List<Long>, i: Int, stack: Stack<TreeNode>) {
+        for (j in 0..1) {
+            if (j == 1)
+                current.children.add(TreeNode(current.value + calibrations[i], i))
+            else
+                current.children.add(TreeNode(current.value * calibrations[i], i))
+            stack.push(current.children[j])
+        }
+    }
+
+    private fun addMultipleChildrenOperations(current: TreeNode, calibrations: List<Long>, i: Int, stack: Stack<TreeNode>) {
+        for (j in 0..2) {
+            when (j) {
+                2 -> current.children.add(TreeNode(current.value + calibrations[i], i))
+                1 -> current.children.add(TreeNode(("" + current.value + "" + calibrations[i]).toLong(), i))
+                else -> current.children.add(TreeNode(current.value * calibrations[i], i))
+            }
+            stack.push(current.children[j])
+        }
+    }
 }
 
 fun main() {
-    var fileInput = Path("src/main/resources/inputDay07.txt").readLines()
+    var fileInput = Path("src/main/resources/inputDay07a.txt").readLines()
     var aoc = AOCDay07()
     aoc.parseInputToMap(fileInput)
+    println(aoc.totalBinaryCalibrationResults())
     println(aoc.totalCalibrationResults())
 }
