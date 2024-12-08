@@ -17,13 +17,8 @@ class AOCDay07() {
                 it[1].split(" ").map { it.toLong() } }
     }
 
-    fun totalBinaryCalibrationResults(): Long {
-        return this.calibrationsMap.filter { traverseOperations(it.value, it.key) }
-            .keys.toMutableList().sumOf { it}
-    }
-
-    fun totalCalibrationResults(): Long {
-        return this.calibrationsMap.filter { traverseOperations(it.value, it.key, false) }
+    fun totalCalibrationResults(hasBinaryChildren: Boolean = true): Long {
+        return this.calibrationsMap.filter { traverseOperations(it.value, it.key, hasBinaryChildren) }
             .keys.toMutableList().sumOf { it}
     }
 
@@ -81,6 +76,6 @@ fun main() {
     var fileInput = Path("src/main/resources/inputDay07a.txt").readLines()
     var aoc = AOCDay07()
     aoc.parseInputToMap(fileInput)
-    println(aoc.totalBinaryCalibrationResults())
     println(aoc.totalCalibrationResults())
+    println(aoc.totalCalibrationResults(false))
 }
