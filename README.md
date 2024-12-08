@@ -6,3 +6,6 @@
 - Day 5: Print Queue (`AOCDay05.kt`)
 - Day 6: Guard Gallivant (`AOCDay06.kt`)
   - Brute-forced this one to death. Need to revisit.
+- Day 7: Bridge Repair (`AOCDay07.kt`)
+- Day 8: Resonant Collinearity (`AOCDay08.kt`)
+  - Need to revisit with tests
