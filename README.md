@@ -9,3 +9,5 @@
 - Day 7: Bridge Repair (`AOCDay07.kt`)
 - Day 8: Resonant Collinearity (`AOCDay08.kt`)
   - Need to revisit with tests
+- Day 9: Disk Fragmenter (`AOCDay09.kt`)
+  - Ditto Day 8
