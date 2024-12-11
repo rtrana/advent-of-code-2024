@@ -11,3 +11,5 @@
   - Need to revisit with tests
 - Day 9: Disk Fragmenter (`AOCDay09.kt`)
   - Ditto Day 8
+- Day 10: Hoof It (`AOCDay10.kt`)
+  - The scariest duplicated code fragments
