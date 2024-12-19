@@ -16,4 +16,5 @@
 - Day 11: Plutonian Pebbles (`AOCDay11.kt`)
 - Day 12: Garden Groups (`AOCDay12.kt`)
 - Day 13: Claw Contraption (`AOCDay13.kt`)
-- Day 14: Restroom Redoubt (`AOCDAY14.kt`)
+- Day 14: Restroom Redoubt (`AOCDay14.kt`)
+- Day 15: Warehouse Woes (`AOCDay15.kt`)
